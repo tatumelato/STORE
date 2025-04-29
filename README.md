@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shunaden's Barbershop - Order Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #ff0000;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+        }
+        
+        .form-section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        
+        .item-list {
+            margin-bottom: 30px;
+        }
+        
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .item-details {
+            flex-grow: 1;
+        }
+        
+        .item-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .item-price {
+            color: #ff0000;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #ff0000;
+        }
+        
+        .quantity {
+            margin: 0 15px;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .additional-item {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .additional-item h3 {
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .custom-item {
+            margin-bottom: 15px;
+        }
+        
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .add-item-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .add-item-btn:hover {
+            background-color: #ff0000;
+        }
+        
+        .customer-details {
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+        }
+        
+        .submit-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #cc0000;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .cart-items {
+            margin-top: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .remove-item {
+            color: #ff0000;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .empty-cart {
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quantity-control {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shunaden's Barbershop</h1>
+        <p>Quality Barber Supplies - Order Form</p>
+    </header>
+    
+    <div class="container">
+        <div class="form-section">
+            <h2>Add Your Items</h2>
+            
+            <div class="additional-item">
+                <div class="custom-item">
+                    <label for="item-name">Item Name:</label>
+                    <input type="text" id="item-name" placeholder="Enter item name">
+                </div>
+                <div class="custom-item">
+                    <label for="item-price">Price (R):</label>
+                    <input type="number" id="item-price" placeholder="Enter price" min="0">
+                </div>
+                <div class="custom-item">
+                    <label for="item-quantity">Quantity:</label>
+                    <input type="number" id="item-quantity" placeholder="Enter quantity" min="1" value="1">
+                </div>
+                <button class="add-item-btn" id="add-custom-item">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>Your Cart</h2>
+            <div class="cart-items" id="cart-items">
+                <div class="empty-cart">Your cart is empty</div>
+            </div>
+            
+            <div class="summary">
+                <div class="total">
+                    <div class="summary-item">
+                        <span>Total:</span>
+                        <span id="total-amount">R0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>Customer Information</h2>
+            <div class="customer-details">
+                <div class="form-group">
+                    <label for="customer-name">Full Name:</label>
+                    <input type="text" id="customer-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone Number:</label>
+                    <input type="text" id="customer-phone" placeholder="Enter your phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-email">Email (Optional):</label>
+                    <input type="text" id="customer-email" placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="delivery-address">Delivery Address (Optional):</label>
+                    <input type="text" id="delivery-address" placeholder="Enter delivery address if needed">
+                </div>
+                <div class="form-group">
+                    <label for="additional-notes">Additional Notes (Optional):</label>
+                    <input type="text" id="additional-notes" placeholder="Any special requests or instructions">
+                </div>
+            </div>
+            
+            <button class="submit-btn" id="send-order">Send Order to WhatsApp</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Store compiled by Melato Tatu</p>
+        <p>Shunaden's Barbershop &copy; 2025. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        // Initialize cart
+        let cart = [];
+        
+        // Get all DOM elements
+        const addCustomItemButton = document.getElementById('add-custom-item');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const totalAmountElement = document.getElementById('total-amount');
+        const sendOrderButton = document.getElementById('send-order');
+        
+        // Add custom item to cart
+        addCustomItemButton.addEventListener('click', () => {
+            const itemName = document.getElementById('item-name').value.trim();
+            const itemPrice = parseFloat(document.getElementById('item-price').value);
+            const itemQuantity = parseInt(document.getElementById('item-quantity').value);
+            
+            if (itemName && !isNaN(itemPrice) && itemPrice > 0 && !isNaN(itemQuantity) && itemQuantity > 0) {
+                addToCart(itemName, itemPrice, itemQuantity);
+                
+                // Clear inputs
+                document.getElementById('item-name').value = '';
+                document.getElementById('item-price').value = '';
+                document.getElementById('item-quantity').value = '1';
+            } else {
+                alert('Please enter valid details for the custom item.');
+            }
+        });
+        
+        // Send order to WhatsApp
+        sendOrderButton.addEventListener('click', () => {
+            const customerName = document.getElementById('customer-name').value.trim();
+            const customerPhone = document.getElementById('customer-phone').value.trim();
+            
+            if (!customerName || !customerPhone) {
+                alert('Please enter your name and phone number.');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                alert('Your cart is empty. Please add items before sending your order.');
+                return;
+            }
+            
+            // Create order message
+            let message = `*New Order from Shunaden's Barbershop*\n\n`;
+            message += `*Customer:* ${customerName}\n`;
+            message += `*Phone:* ${customerPhone}\n`;
+            
+            const email = document.getElementById('customer-email').value.trim();
+            if (email) {
+                message += `*Email:* ${email}\n`;
+            }
+            
+            const address = document.getElementById('delivery-address').value.trim();
+            if (address) {
+                message += `*Delivery Address:* ${address}\n`;
+            }
+            
+            message += `\n*Order Details:*\n`;
+            
+            cart.forEach(item => {
+                message += `- ${item.name} x${item.quantity} @ R${item.price.toFixed(2)} = R${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            message += `\n*Total Amount: R${calculateTotal().toFixed(2)}*\n`;
+            
+            const notes = document.getElementById('additional-notes').value.trim();
+            if (notes) {
+                message += `\n*Additional Notes:*\n${notes}\n`;
+            }
+            
+            // Encode message for WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/27817212196?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+        });
+        
+        // Function to add item to cart
+        function addToCart(name, price, quantity) {
+            const existingItemIndex = cart.findIndex(item => item.name === name);
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: quantity
+                });
+            }
+            
+            updateCartDisplay();
+        }
+        
+        // Function to remove item from cart
+        function removeFromCart(name, quantity) {
+            const existingItemIndex = cart.findIndex(item => item.name === name);
+            
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity -= quantity;
+                
+                if (cart[existingItemIndex].quantity <= 0) {
+                    cart.splice(existingItemIndex, 1);
+                }
+            }
+            
+            updateCartDisplay();
+        }
+        
+        // Remove entire item from cart
+        function removeEntireItem(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+        
+        // Calculate cart total
+        function calculateTotal() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart">Your cart is empty</div>';
+            } else {
+                let cartHTML = '';
+                
+                cart.forEach((item, index) => {
+                    cartHTML += `
+                        <div class="cart-item">
+                            <span>${item.name} x${item.quantity} @ R${item.price.toFixed(2)}</span>
+                            <span>R${(item.price * item.quantity).toFixed(2)} <span class="remove-item" data-index="${index}">✕</span></span>
+                        </div>
+                    `;
+                });
+                
+                cartItemsContainer.innerHTML = cartHTML;
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const index = parseInt(button.getAttribute('data-index'));
+                        removeEntireItem(index);
+                    });
+                });
+            }
+            
+            // Update total
+            totalAmountElement.textContent = `R${calculateTotal().toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
